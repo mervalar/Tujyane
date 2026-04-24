@@ -1,0 +1,113 @@
+.page { padding-top: var(--space-5); padding-bottom: var(--space-8); }
+
+.back { background: none; border: none; color: var(--color-primary); font-size: var(--text-base); font-weight: var(--fw-medium); cursor: pointer; margin-bottom: var(--space-5); padding: 0; }
+.back:hover { text-decoration: underline; }
+
+.title { font-size: var(--text-2xl); margin-bottom: var(--space-5); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* Summary card */
+.summary {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.summary h2 { font-size: var(--text-xl); }
+
+.summaryRoute {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.summaryPoint { display: flex; flex-direction: column; gap: 2px; }
+.summaryPointEnd { text-align: right; }
+.sumTime { font-size: var(--text-2xl); font-weight: var(--fw-bold); }
+.sumCity { font-size: var(--text-base); font-weight: var(--fw-semibold); }
+
+.sumArrow { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; color: var(--color-text-muted); }
+.sumDur { font-size: var(--text-xs); }
+
+.summaryDate { color: var(--color-text-muted); }
+
+/* Seats picker */
+.seatsRow { display: flex; justify-content: space-between; align-items: center; }
+.seatsLabel { font-weight: var(--fw-medium); }
+.seatsPicker { display: flex; align-items: center; gap: var(--space-3); }
+.seatsBtn {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.seatsBtn:hover:not(:disabled) { background: var(--color-primary); color: #fff; }
+.seatsBtn:disabled { opacity: .4; cursor: not-allowed; }
+.seatsCount { font-size: var(--text-2xl); font-weight: var(--fw-bold); min-width: 32px; text-align: center; }
+
+/* Payment */
+.payment {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: 80px;
+}
+.payment h2 { font-size: var(--text-xl); }
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-base);
+}
+.total {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-primary);
+}
+
+.error { background: #f8d7da; color: #721c24; border-radius: var(--radius-md); padding: var(--space-3); font-size: var(--text-sm); }
+.cancelNote { font-size: var(--text-xs); color: var(--color-text-muted); text-align: center; }
+
+/* Success */
+.success {
+  max-width: 560px;
+  margin: var(--space-8) auto;
+  padding: var(--space-5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.successIcon { font-size: 4rem; }
+.success h1 { font-size: var(--text-2xl); }
+.success p { color: var(--color-text-muted); line-height: 1.7; }
+.total { color: var(--color-text); font-size: var(--text-lg); }
+.successActions { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; margin-top: var(--space-3); }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .payment { position: static; }
+}

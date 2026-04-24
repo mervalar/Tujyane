@@ -1,0 +1,123 @@
+.page { padding-top: var(--space-5); padding-bottom: var(--space-8); }
+
+.back {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  margin-bottom: var(--space-5);
+  padding: 0;
+}
+.back:hover { text-decoration: underline; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.main {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.topRow { display: flex; gap: var(--space-2); }
+
+/* Route */
+.route { display: flex; align-items: center; gap: var(--space-4); }
+
+.point { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.pointEnd { text-align: right; }
+
+.time { font-size: var(--text-3xl); font-weight: var(--fw-bold); }
+.city { font-size: var(--text-lg); font-weight: var(--fw-semibold); }
+.address { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.line { flex: 1; display: flex; flex-direction: column; align-items: center; gap: var(--space-1); }
+.dur { font-size: var(--text-sm); color: var(--color-text-muted); }
+.track { width: 100%; height: 2px; background: var(--color-border); position: relative; }
+.track::after { content: '▶'; position: absolute; right: -4px; top: -7px; font-size: 10px; color: var(--color-text-muted); }
+
+.date { font-size: var(--text-base); color: var(--color-text-muted); }
+.description { color: var(--color-text); line-height: 1.7; }
+
+.amenities h3 { font-size: var(--text-base); margin-bottom: var(--space-2); }
+.amenityList { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.amenityTag {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: 80px;
+}
+
+.priceBox { text-align: center; }
+.priceLabel { display: block; font-size: var(--text-sm); color: var(--color-text-muted); }
+.price { font-size: var(--text-3xl); font-weight: var(--fw-bold); color: var(--color-primary); }
+
+.seatsInfo { text-align: center; font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.loginHint { font-size: var(--text-sm); color: var(--color-text-muted); text-align: center; }
+.linkBtn { background: none; border: none; color: var(--color-primary); font-weight: var(--fw-semibold); cursor: pointer; padding: 0; }
+
+.providerCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.providerAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.providerName { font-weight: var(--fw-semibold); }
+.providerMeta { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  text-align: center;
+}
+.errorState span { font-size: 3rem; }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}

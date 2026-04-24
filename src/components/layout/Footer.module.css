@@ -1,0 +1,54 @@
+.footer {
+  background: var(--color-text);
+  color: rgba(255,255,255,.75);
+  margin-top: auto;
+  padding: var(--space-7) 0 var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  justify-content: space-between;
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: var(--space-4);
+}
+
+.brand { max-width: 260px; }
+.brand p { margin-top: var(--space-2); line-height: 1.6; }
+
+.logo {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: #fff;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-7);
+}
+
+.links div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.links h4 {
+  color: #fff;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: var(--space-1);
+}
+
+.links a {
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.links a:hover { color: #fff; }
+
+.copy { text-align: center; color: rgba(255,255,255,.4); }

@@ -1,0 +1,116 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.header {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Route row */
+.route {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.pointEnd { text-align: right; }
+
+.time {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.city {
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+}
+
+.address {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.line {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.duration {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.track {
+  width: 100%;
+  height: 2px;
+  background: var(--color-border);
+  position: relative;
+}
+.track::after {
+  content: '▶';
+  position: absolute;
+  right: -4px;
+  top: -7px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+/* Meta */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.driver, .operator { font-weight: var(--fw-medium); }
+
+.seats { color: var(--color-secondary); font-weight: var(--fw-semibold); }
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.price {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+}
+
+@media (max-width: 480px) {
+  .footer { flex-direction: column; align-items: stretch; }
+  .footer button { width: 100%; }
+}
