@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --input-type=module --eval \"import './src/App.jsx'\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Xvisible\\\\Tujyane\" -Recurse -Depth 3)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Xvisible\\\\Tujyane\" -Recurse | Where-Object {$_.PSIsContainer -or $_.Extension -in @\\('.js', '.jsx', '.json'\\)} | Select-Object -ExpandProperty FullName | head -100)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Xvisible\\\\Tujyane\" -Recurse | Where-Object {$_.PSIsContainer} | Select-Object -ExpandProperty FullName | Sort-Object)",
+      "PowerShell(ls -Path \"c:\\\\xampp\\\\htdocs\\\\Xvisible\\\\Tujyane\\\\src\" -Recurse | Where-Object {$_.Extension -in @\\('.js', '.jsx'\\)} | Select-Object FullName)"
+    ]
+  }
+}

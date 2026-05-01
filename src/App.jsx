@@ -4,18 +4,22 @@ import { TripProvider } from './context/TripContext';
 
 import MainLayout      from './layouts/MainLayout';
 import DashboardLayout from './layouts/DashboardLayout';
+import DriverLayout    from './layouts/DriverLayout';
 import ProtectedRoute  from './components/common/ProtectedRoute';
 
-import Home            from './pages/Home';
-import Results         from './pages/Results';
-import TripDetail      from './pages/TripDetail';
-import Booking         from './pages/Booking';
-import UserDashboard   from './pages/UserDashboard';
-import DriverDashboard from './pages/DriverDashboard';
-import CreateTrip      from './pages/CreateTrip';
+import Home       from './pages/Home';
+import Results    from './pages/Results';
+import TripDetail from './pages/TripDetail';
+import Booking    from './pages/Booking';
+import UserDashboard from './pages/UserDashboard';
 
 import LoginForm    from './features/auth/LoginForm';
 import RegisterForm from './features/auth/RegisterForm';
+
+import DriverDashboard from './features/driver/Dashboard';
+import DriverTrips     from './features/driver/Trips';
+import DriverCreateTrip from './features/driver/CreateTrip';
+import DriverProfile   from './features/driver/Profile';
 
 export default function App() {
   return (
@@ -40,12 +44,15 @@ export default function App() {
             {/* Passenger dashboard */}
             <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
               <Route path="/dashboard" element={<UserDashboard />} />
+              
             </Route>
 
-            {/* Driver-only routes */}
-            <Route element={<ProtectedRoute requiredRole="driver"><DashboardLayout /></ProtectedRoute>}>
+            {/* Driver portal — uses the AdminLTE-style DriverLayout */}
+            <Route element={<ProtectedRoute requiredRole="driver"><DriverLayout /></ProtectedRoute>}>
               <Route path="/driver/dashboard" element={<DriverDashboard />} />
-              <Route path="/driver/create"    element={<CreateTrip />} />
+              <Route path="/driver/trips"     element={<DriverTrips />} />
+              <Route path="/driver/create"    element={<DriverCreateTrip />} />
+              <Route path="/driver/profile"   element={<DriverProfile />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

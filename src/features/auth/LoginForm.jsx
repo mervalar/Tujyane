@@ -1,31 +1,79 @@
 import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import styles from './AuthForm.module.css';
+import { useAuth } from '../../context/AuthContext';
+
+
 
 export default function LoginForm() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from || '/';
+ 
 
   const [form, setForm] = useState({ email: '', password: '' });
+  const [fieldErrors, setFieldErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   function handleChange(e) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
+    setFieldErrors((prev) => ({ ...prev, [name]: '' }));
+  }
+
+  function validateForm(values) {
+    const errors = {};
+    const email = values.email.trim();
+    const password = values.password.trim();
+
+    if (!email) {
+      errors.email = 'Email address is required.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = 'Please enter a valid email address.';
+    }
+
+    if (!password) {
+      errors.password = 'Password is required.';
+    } else if (password.length < 6) {
+      errors.password = 'Password must be at least 6 characters.';
+    }
+
+    return errors;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
+    const errors = validateForm(form);
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
     setLoading(true);
     try {
-      await login(form);
-      navigate(from, { replace: true });
+      const user = await login({
+        email: form.email.trim(),
+        password: form.password.trim(),
+      });
+      console.log(user);
+    //  const toke = localStorage.getItem("tujyane_token");
+    //   console.log(toke);
+      
+
+      if (user?.role === 'driver') {
+        navigate('/driver/dashboard', { replace: true });
+        return;
+      }
+      if (user?.role === 'passenger') {
+        navigate('/dashboard',{replace:true});
+        return;
+      }
+
+      // navigate('/dashboard', { replace: true });
     } catch (err) {
       setError(err.message || 'Login failed. Check your credentials.');
     } finally {
@@ -49,6 +97,7 @@ export default function LoginForm() {
             name="email"
             value={form.email}
             onChange={handleChange}
+            error={fieldErrors.email}
             placeholder="you@example.com"
             required
             autoComplete="email"
@@ -61,6 +110,7 @@ export default function LoginForm() {
             name="password"
             value={form.password}
             onChange={handleChange}
+            error={fieldErrors.password}
             placeholder="Enter your password"
             required
             autoComplete="current-password"

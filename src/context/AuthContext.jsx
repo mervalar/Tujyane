@@ -27,11 +27,16 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('tujyane_token');
+    const cachedUser = localStorage.getItem('tujyane_user');
     if (!token) {
       dispatch({ type: 'LOGOUT' });
       return;
     }
     dispatch({ type: 'SET_TOKEN', payload: token });
+    if (cachedUser) {
+      dispatch({ type: 'SET_USER', payload: JSON.parse(cachedUser) });
+      return;
+    }
     getMe()
       .then((user) => dispatch({ type: 'SET_USER', payload: user }))
       .catch(() => dispatch({ type: 'LOGOUT' }));
@@ -42,8 +47,10 @@ export function AuthProvider({ children }) {
     try {
       const { token, user } = await login(credentials);
       localStorage.setItem('tujyane_token', token);
+      localStorage.setItem('tujyane_user', JSON.stringify(user));
       dispatch({ type: 'SET_TOKEN', payload: token });
       dispatch({ type: 'SET_USER', payload: user });
+      return user;
     } catch (err) {
       dispatch({ type: 'SET_ERROR', payload: err.message });
       throw err;
@@ -55,6 +62,7 @@ export function AuthProvider({ children }) {
     try {
       const { token, user } = await register(data);
       localStorage.setItem('tujyane_token', token);
+      localStorage.setItem('tujyane_user', JSON.stringify(user));
       dispatch({ type: 'SET_TOKEN', payload: token });
       dispatch({ type: 'SET_USER', payload: user });
     } catch (err) {
@@ -65,7 +73,13 @@ export function AuthProvider({ children }) {
 
   function handleLogout() {
     localStorage.removeItem('tujyane_token');
+    localStorage.removeItem('tujyane_user');
     dispatch({ type: 'LOGOUT' });
+  }
+
+  function updateUser(updatedUser) {
+    localStorage.setItem('tujyane_user', JSON.stringify(updatedUser));
+    dispatch({ type: 'SET_USER', payload: updatedUser });
   }
 
   return (
@@ -76,6 +90,7 @@ export function AuthProvider({ children }) {
         login: handleLogin,
         register: handleRegister,
         logout: handleLogout,
+        updateUser,
       }}
     >
       {children}
