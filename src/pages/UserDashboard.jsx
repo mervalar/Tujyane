@@ -24,7 +24,7 @@ export default function UserDashboard() {
     setCancelling(bookingId);
     await cancelBooking(bookingId);
     setBookings((prev) =>
-      prev.map((b) => b.id === bookingId ? { ...b, status: 'cancelled' } : b)
+      prev.map((b) => b._id === bookingId ? { ...b, status: 'cancelled' } : b)
     );
     setCancelling(null);
   }
@@ -47,7 +47,7 @@ export default function UserDashboard() {
           {bookings.map((b) => {
             const trip = b.trip;
             return (
-              <div key={b.id} className={styles.card}>
+              <div key={b._id} className={styles.card}>
                 <div className={styles.cardTop}>
                   <div className={styles.route}>
                     <span className={styles.city}>{trip.from.city}</span>
@@ -64,20 +64,20 @@ export default function UserDashboard() {
 
                 <div className={styles.meta}>
                   <span>📅 {formatDate(trip.date)} at {trip.departureTime}</span>
-                  <span>🪑 {b.seats} seat{b.seats > 1 ? 's' : ''}</span>
+                  <span>🪑 {b.seatsBooked} seat{b.seatsBooked > 1 ? 's' : ''}</span>
                   <span>💰 {formatPrice(b.totalPrice, b.currency)}</span>
                 </div>
 
                 <div className={styles.actions}>
-                  <Button variant="outline" size="sm" onClick={() => navigate(`/trips/${trip.id}`)}>
+                  <Button variant="outline" size="sm" onClick={() => navigate(`/trips/${trip._id}`)}>
                     View trip
                   </Button>
                   {b.status !== 'cancelled' && (
                     <Button
                       variant="danger"
                       size="sm"
-                      loading={cancelling === b.id}
-                      onClick={() => handleCancel(b.id)}
+                      loading={cancelling === b._id}
+                      onClick={() => handleCancel(b._id)}
                     >
                       Cancel
                     </Button>

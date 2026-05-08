@@ -123,13 +123,10 @@ export default function TripDetail() {
           {/* Provider info */}
           <div className={styles.providerCard}>
             <div className={styles.providerAvatar}>
-              {provider?.name?.[0]?.toUpperCase() || '?'}
+              {(provider?.fullname ?? provider?.name)?.[0]?.toUpperCase() || '?'}
             </div>
             <div>
-              <p className={styles.providerName}>{provider?.name}</p>
-              {!isBus && trip.driver?.rating && (
-                <p className={styles.providerMeta}>⭐ {trip.driver.rating} · {trip.driver.trips} trips</p>
-              )}
+              <p className={styles.providerName}>{provider?.fullname ?? provider?.name}</p>
               {isBus && <p className={styles.providerMeta}>Registered operator</p>}
             </div>
           </div>

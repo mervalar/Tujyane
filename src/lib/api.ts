@@ -1,8 +1,4 @@
-const API_BASE_URL =
-  (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_API_URL : undefined) ||
-  (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_API_BASE_URL : undefined) ||
-  (typeof import.meta !== "undefined" ? (import.meta as any).env?.VITE_API_BASE_URL : undefined) ||
-  "http://localhost:3000/api";
+const API_BASE_URL ="http://localhost:3000/api";
 
 export async function registerUser(payload: {
   fullname: string;

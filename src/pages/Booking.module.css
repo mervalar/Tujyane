@@ -58,6 +58,7 @@
 .seatsBtn:hover:not(:disabled) { background: var(--color-primary); color: #fff; }
 .seatsBtn:disabled { opacity: .4; cursor: not-allowed; }
 .seatsCount { font-size: var(--text-2xl); font-weight: var(--fw-bold); min-width: 32px; text-align: center; }
+.seatsInfo { font-size: var(--text-sm); color: var(--color-text-muted); margin-top: calc(-1 * var(--space-3)); }
 
 /* Payment */
 .payment {

@@ -8,11 +8,87 @@
 
 .body { padding-top: var(--space-5); padding-bottom: var(--space-8); }
 
-.heading { margin-bottom: var(--space-5); }
+.heading { margin-bottom: var(--space-4); }
 .heading h1 { font-size: var(--text-2xl); }
 .dateLabel { color: var(--color-text-muted); margin-top: var(--space-1); }
 .count { font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-1); }
 
+/* ── Toolbar: filter toggle + sort chips ── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.filterToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.filterToggle:hover { border-color: var(--color-primary); }
+.filterToggleActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+}
+
+.sortLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.sortChips {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--color-primary); }
+.chipActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ── Layout ── */
 .grid {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -38,6 +114,9 @@
 .empty span { font-size: 3rem; }
 .empty h3 { font-size: var(--text-xl); color: var(--color-text); }
 
+/* ── Mobile ── */
 @media (max-width: 768px) {
   .grid { grid-template-columns: 1fr; }
+
+  .filterToggle { order: -1; }
 }

@@ -22,6 +22,15 @@ function reducer(state, action) {
       return { ...state, error: action.payload, loading: false };
     case 'SET_FILTERS':
       return { ...state, filters: { ...state.filters, ...action.payload } };
+    case 'UPDATE_TRIP_SEATS':
+      return {
+        ...state,
+        results: state.results.map((t) =>
+          (t._id ?? t.id) === action.payload.tripId
+            ? { ...t, seatsAvailable: Math.max(0, t.seatsAvailable - action.payload.seats) }
+            : t
+        ),
+      };
     default:
       return state;
   }
@@ -50,6 +59,10 @@ export function TripProvider({ children }) {
     dispatch({ type: 'SET_FILTERS', payload: filters });
   }
 
+  function updateTripSeats(tripId, seats) {
+    dispatch({ type: 'UPDATE_TRIP_SEATS', payload: { tripId, seats } });
+  }
+
   const filteredResults = state.results
     .filter((t) => {
       if (state.filters.type && t.type !== state.filters.type) return false;
@@ -58,12 +71,23 @@ export function TripProvider({ children }) {
     })
     .sort((a, b) => {
       if (state.filters.sortBy === 'price') return a.price - b.price;
-      return a.departureTime.localeCompare(b.departureTime);
+      const dateA = new Date(`${String(a.date).split('T')[0]}T${a.departureTime}`);
+      const dateB = new Date(`${String(b.date).split('T')[0]}T${b.departureTime}`);
+      return dateA - dateB;
     });
 
   return (
     <TripContext.Provider
-      value={{ ...state, filteredResults, setSearchParams, setResults, setLoading, setError, setFilters }}
+      value={{
+        ...state,
+        filteredResults,
+        setSearchParams,
+        setResults,
+        setLoading,
+        setError,
+        setFilters,
+        updateTripSeats,
+      }}
     >
       {children}
     </TripContext.Provider>

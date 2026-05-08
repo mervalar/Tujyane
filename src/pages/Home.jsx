@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import SearchBar from '../components/search/SearchBar';
+import TripCard from '../components/trip/TripCard';
+import Spinner from '../components/common/Spinner';
+import { getTrips } from '../services/tripsService';
 import styles from './Home.module.css';
 
-const CITIES = ['Kigali', 'Musanze', 'Butare', 'Gisenyi', 'Rwamagana', 'Cyangugu'];
-
 export default function Home() {
+  const [trips, setTrips]           = useState([]);
+  const [tripsLoading, setTripsLoading] = useState(true);
+
+  useEffect(() => {
+    getTrips()
+      .then((data) => setTrips(data.slice(0, 6)))
+      .catch(() => {})
+      .finally(() => setTripsLoading(false));
+  }, []);
+
   return (
     <div className={styles.page}>
       {/* Hero */}
@@ -11,7 +24,7 @@ export default function Home() {
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroText}>
             <h1 className={styles.heroTitle}>
-              Travel across Rwanda — <span>together</span>
+              Travel across Rwanda <span>together</span>
             </h1>
             <p className={styles.heroSub}>
               Book a seat in a carpool or catch the next bus. Fast, affordable, and simple.
@@ -28,14 +41,13 @@ export default function Home() {
         <h2 className={styles.sectionTitle}>Popular routes</h2>
         <div className={styles.routes}>
           {[
-            { from: 'Kigali', to: 'Musanze', price: 'From 3,500 RWF', emoji: '🏔' },
-            { from: 'Kigali', to: 'Butare',  price: 'From 2,000 RWF', emoji: '🎓' },
-            { from: 'Kigali', to: 'Gisenyi', price: 'From 4,000 RWF', emoji: '🌊' },
-            { from: 'Kigali', to: 'Rwamagana', price: 'From 2,500 RWF', emoji: '🌿' },
+            { from: 'Kigali', to: 'Musanze',  emoji: '🏔' },
+            { from: 'Kigali', to: 'Butare',   emoji: '🎓' },
+            { from: 'Kigali', to: 'Gisenyi',  emoji: '🌊' },
+            { from: 'Kigali', to: 'Rwamagana', emoji: '🌿' },
           ].map((r) => (
             <a
-              key={r.from + r.to}
-              href={`/results?from=${r.from}&to=${r.to}&date=${new Date().toISOString().split('T')[0]}`}
+             
               className={styles.routeCard}
             >
               <span className={styles.routeEmoji}>{r.emoji}</span>
@@ -48,6 +60,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Upcoming trips */}
+      <section className={`container ${styles.section}`}>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionHeadTitle}>Upcoming trips</h2>
+          <Link to="/results" className={styles.seeAll}>See all →</Link>
+        </div>
+        {tripsLoading ? (
+          <Spinner />
+        ) : trips.length === 0 ? (
+          <p className={styles.empty}>No upcoming trips at the moment. Check back soon.</p>
+        ) : (
+          <div className={styles.tripsGrid}>
+            {trips.map((trip) => (
+              <TripCard key={trip._id} trip={trip} />
+            ))}
+          </div>
+        )}
+      </section>
+
       {/* How it works */}
       <section className={styles.howSection}>
         <div className={`container ${styles.section}`}>
@@ -56,7 +87,7 @@ export default function Home() {
             {[
               { icon: '🔍', title: 'Search', desc: 'Enter your departure city, destination, and travel date.' },
               { icon: '🪑', title: 'Choose', desc: 'Pick a carpool or bus that fits your time and budget.' },
-              { icon: '✅', title: 'Book', desc: 'Confirm your seat in seconds. No cash needed.' },
+              { icon: '✅', title: 'Book', desc: 'Confirm your seat in seconds.' },
               { icon: '🚀', title: 'Travel', desc: 'Enjoy your trip. Driver contacts you before departure.' },
             ].map((s) => (
               <div key={s.title} className={styles.step}>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getTripById } from '../services/tripsService';
 import { useBooking } from '../hooks/useBooking';
+import { useTrips } from '../context/TripContext';
 import Button from '../components/common/Button';
 import Spinner from '../components/common/Spinner';
 import { formatPrice, formatDate, durationLabel } from '../utils/format';
@@ -11,6 +12,7 @@ export default function Booking() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { book, loading: booking, error: bookingError } = useBooking();
+  const { updateTripSeats } = useTrips();
 
   const [trip, setTrip]       = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,6 +29,7 @@ export default function Booking() {
   async function handleBook() {
     try {
       await book({ tripId: id, seats });
+      updateTripSeats(id, seats);
       setConfirmed(true);
     } catch (_) {}
   }
@@ -40,10 +43,13 @@ export default function Booking() {
         <span className={styles.successIcon}>🎉</span>
         <h1>Booking confirmed!</h1>
         <p>
-          Your {seats} seat{seats > 1 ? 's' : ''} on <strong>{trip.from.city} → {trip.to.city}</strong> on{' '}
+          Your {seats} seat{seats > 1 ? 's' : ''} on{' '}
+          <strong>{trip.from.city} → {trip.to.city}</strong> on{' '}
           {formatDate(trip.date)} at {trip.departureTime} are reserved.
         </p>
-        <p className={styles.total}>Total paid: <strong>{formatPrice(trip.price * seats, trip.currency)}</strong></p>
+        <p className={styles.total}>
+          Total paid: <strong>{formatPrice(trip.price * seats, trip.currency)}</strong>
+        </p>
         <div className={styles.successActions}>
           <Button variant="primary" size="lg" onClick={() => navigate('/dashboard')}>
             View my bookings
@@ -99,6 +105,10 @@ export default function Booking() {
               >+</button>
             </div>
           </div>
+
+          <p className={styles.seatsInfo}>
+            {trip.seatsAvailable} seat{trip.seatsAvailable !== 1 ? 's' : ''} available
+          </p>
         </section>
 
         {/* Payment summary */}

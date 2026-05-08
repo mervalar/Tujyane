@@ -41,11 +41,9 @@ export default function TripCard({ trip }) {
 
       <div className={styles.meta}>
         {isBus ? (
-          <span className={styles.operator}>{trip.operator?.name}</span>
+          <span className={styles.operator}>{trip.operator?.fullname ?? trip.operator?.name}</span>
         ) : (
-          <span className={styles.driver}>
-            {trip.driver?.name} · ⭐ {trip.driver?.rating}
-          </span>
+          <span className={styles.driver}>{trip.driver?.fullname}</span>
         )}
         <span className={styles.seats}>
           {isFull ? 'No seats' : `${trip.seatsAvailable} seat${trip.seatsAvailable !== 1 ? 's' : ''}`}
@@ -58,7 +56,7 @@ export default function TripCard({ trip }) {
           variant="primary"
           size="md"
           disabled={isFull}
-          onClick={() => navigate(`/trips/${trip.id}`)}
+          onClick={() => navigate(`/trips/${trip._id}`)}
         >
           {isFull ? 'Unavailable' : 'View & Book'}
         </Button>

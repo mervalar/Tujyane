@@ -7,7 +7,7 @@ export default function Footer() {
       <div className={`container ${styles.inner}`}>
         <div className={styles.brand}>
           <span className={styles.logo}>🚌 Tujyane</span>
-          <p>Rwanda's transport platform — carpooling and bus booking made simple.</p>
+          <p>Rwanda's transport platform, carpooling and bus booking made simple.</p>
         </div>
 
         <nav className={styles.links}>
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
         </nav>
       </div>
-      <p className={styles.copy}>© {new Date().getFullYear()} Tujyane. Made in Rwanda.</p>
+      <p className={styles.copy}>© {new Date().getFullYear()} Tujyane. Made by visibleX All rights reserved.</p>
     </footer>
   );
 }

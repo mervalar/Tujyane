@@ -59,10 +59,6 @@ export default function LoginForm() {
         email: form.email.trim(),
         password: form.password.trim(),
       });
-      console.log(user);
-    //  const toke = localStorage.getItem("tujyane_token");
-    //   console.log(toke);
-      
 
       if (user?.role === 'driver') {
         navigate('/driver/dashboard', { replace: true });
@@ -72,8 +68,10 @@ export default function LoginForm() {
         navigate('/dashboard',{replace:true});
         return;
       }
-
-      // navigate('/dashboard', { replace: true });
+      if (user?.role === 'admin') {
+        navigate('/admin/dashboard', { replace: true });
+        return;
+      }
     } catch (err) {
       setError(err.message || 'Login failed. Check your credentials.');
     } finally {

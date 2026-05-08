@@ -13,6 +13,7 @@ const UserSchema = mongoose.Schema({
             lastLoginAt:{type:Date, required:false},
             isActive:{type:Boolean,  default:true},
             isVerified:{type:Boolean,default:false},
+            rejectionReason:{type:String, default:''},
 },{timestamps:true});
 
 const UserModel = mongoose.model('User', UserSchema);

@@ -10,7 +10,6 @@ export async function login({ email, password }) {
 
 export async function register({ fullname, email, password, phone, role }) {
   await api.post('/users/register', { fullname, email, password, phone, role });
-  // Backend doesn't issue a token on register, so log in immediately
   return login({ email, password });
 }
 
@@ -23,6 +22,4 @@ export async function getMe() {
     if (cachedUser) return JSON.parse(cachedUser);
     throw error;
   }
-
 }
-

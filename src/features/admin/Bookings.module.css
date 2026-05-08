@@ -1,0 +1,191 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.count { color: #94a3b8; font-size: 0.875rem; margin: 4px 0 0; }
+
+.totalCard {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+
+.totalLabel { font-size: 0.78rem; color: #94a3b8; font-weight: 500; }
+.totalValue { font-size: 1.25rem; font-weight: 700; color: #0f172a; }
+
+/* ── Filters ───────────────────────────────────────────── */
+.filters { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.search {
+  flex: 1;
+  min-width: 220px;
+  padding: 9px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.search:focus { border-color: var(--color-primary, #0052cc); }
+
+.select {
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.select:focus { border-color: var(--color-primary, #0052cc); }
+
+/* ── Table ─────────────────────────────────────────────── */
+.tableWrap {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  border: 1px solid #f1f5f9;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table thead th {
+  background: #f8fafc;
+  padding: 12px 16px;
+  text-align: left;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover td { background: #f8fafc; }
+
+.rowCancelled td { opacity: 0.55; }
+
+/* ── Cells ─────────────────────────────────────────────── */
+.passengerCell { display: flex; align-items: center; gap: 8px; }
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ede9fe;
+  color: #6d28d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.passengerName { font-weight: 600; white-space: nowrap; }
+.route { color: #475569; font-size: 0.83rem; white-space: nowrap; }
+.muted { color: #64748b; font-size: 0.84rem; white-space: nowrap; }
+.center { text-align: center; }
+.amount { font-weight: 600; white-space: nowrap; }
+
+/* ── Badges ────────────────────────────────────────────── */
+.typeBadge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.typeBus     { background: #dbeafe; color: #1d4ed8; }
+.typeCarpool { background: #dcfce7; color: #15803d; }
+
+.statusBadge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.confirmed { background: #dcfce7; color: #15803d; }
+.pending   { background: #fef9c3; color: #a16207; }
+.cancelled { background: #fee2e2; color: #b91c1c; }
+
+/* ── Action ────────────────────────────────────────────── */
+.cancelBtn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.cancelBtn:hover:not(:disabled) { background: #fecaca; }
+.cancelBtn:disabled { opacity: 0.5; cursor: default; }
+
+/* ── Empty ─────────────────────────────────────────────── */
+.empty {
+  background: #fff;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  color: #94a3b8;
+  border: 1px solid #f1f5f9;
+}
+
+@media (max-width: 900px) {
+  .table thead th:nth-child(8),
+  .table tbody td:nth-child(8) { display: none; }
+}
+
+@media (max-width: 700px) {
+  .table thead th:nth-child(3),
+  .table tbody td:nth-child(3),
+  .table thead th:nth-child(5),
+  .table tbody td:nth-child(5) { display: none; }
+}

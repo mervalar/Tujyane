@@ -7,6 +7,19 @@
   flex-direction: column;
   gap: var(--space-5);
   height: fit-content;
+  position: sticky;
+  top: 80px;
+}
+
+/* Mobile: hidden by default, visible when open */
+@media (max-width: 768px) {
+  .panel {
+    display: none;
+    position: static;
+  }
+  .panelOpen {
+    display: flex;
+  }
 }
 
 .header {
@@ -17,6 +30,23 @@
 
 .header h3 {
   font-size: var(--text-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.activeCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
 }
 
 .resetBtn {
@@ -45,19 +75,37 @@
   margin-bottom: var(--space-1);
 }
 
-.radio {
-  display: flex;
-  align-items: center;
+/* Trip type toggle buttons */
+.typeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-2);
-  font-size: var(--text-base);
-  cursor: pointer;
-  padding: var(--space-2) var(--space-2);
-  border-radius: var(--radius-sm);
-  transition: background var(--transition);
 }
-.radio:hover { background: var(--color-bg); }
-.radio input { accent-color: var(--color-primary); width: 18px; height: 18px; cursor: pointer; }
 
+.typeBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-2);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.typeBtn:hover { border-color: var(--color-primary); }
+.typeBtnActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.typeIcon { font-size: 1.25rem; }
+
+/* Price range */
 .rangeRow {
   display: flex;
   justify-content: space-between;
@@ -65,8 +113,24 @@
   color: var(--color-text-muted);
 }
 
+.priceVal {
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
 .range {
   width: 100%;
   accent-color: var(--color-primary);
   cursor: pointer;
 }
+
+.clearPrice {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.clearPrice:hover { color: var(--color-primary); text-decoration: underline; }
